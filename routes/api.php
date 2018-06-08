@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,8 +12,10 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+use Illuminate\Support\Facades\Route;
 
+Route::middleware('apiMidd')->group(function () {
+    Route::get('/user', 'UserController@login');
+    Route::get('/bill', 'BillController@index');
+});
 //Auth::routes();

@@ -2,25 +2,41 @@
 
 namespace App\Http\Middleware;
 
+use App\User;
 use Closure;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 
-class RedirectIfAuthenticated
+class ApiMiddleware
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @param  string|null $guard
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (Auth::guard($guard)->check()) {
 
-            return redirect('/home');
+
+        // Pre-Middleware Action
+        if (($request->method() == 'POST') && $request->path() == 'api/user') {
+            $response = $next($request);
+            return $response;
         }
+
+        $user = User::findByToken($request->input('token'));
+
+        if (empty($user)) {
+            return new Response([
+                'code' => -1,
+                'message' => 'No Login',
+                'data' => null
+            ]);
+        }
+
+        $request->offsetSet('user', $user);
 
         return $next($request);
     }
