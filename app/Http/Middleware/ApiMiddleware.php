@@ -26,7 +26,15 @@ class ApiMiddleware
             return $response;
         }
 
-        $user = User::findByToken($request->input('token'));
+        if (!$request->hasHeader('token')) {
+            return new Response([
+                'code' => -1,
+                'message' => 'No Login',
+                'data' => null
+            ]);
+        }
+
+        $user = User::findByToken($request->header('token'));
 
         if (empty($user)) {
             return new Response([
@@ -36,7 +44,7 @@ class ApiMiddleware
             ]);
         }
 
-        $request->offsetSet('user', $user);
+        $request->merge(['user' => $user]);
 
         return $next($request);
     }
