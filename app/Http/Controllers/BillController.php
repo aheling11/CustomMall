@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Bill;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
 use Illuminate\Support\Facades\Auth;
 
 class BillController extends Controller
 {
+
 
 
     /**
@@ -27,11 +30,13 @@ class BillController extends Controller
         return $Bill;
     }
 
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index($id)
     {
         return Bill::findOrFail($id);
@@ -91,6 +96,7 @@ class BillController extends Controller
         //
         return Bill::destroy($id);
     }
+
 
 
 

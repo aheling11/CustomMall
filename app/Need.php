@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Need extends Model
@@ -35,4 +36,5 @@ class Need extends Model
      */
     protected $fillable = [
     ];
+
 }

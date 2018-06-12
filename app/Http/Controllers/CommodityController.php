@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Commodity;
 use Illuminate\Http\Request;
+
 use Illuminate\Http\Response;
+
 
 class CommodityController extends Controller
 {
@@ -72,6 +74,7 @@ class CommodityController extends Controller
     public function edit($id, Request $request)
     {
         //
+
 //        if ($request->input('user')->id !== $request->input('user_id')) {
 //            return new Response([
 //                'code' => -1,
@@ -79,6 +82,7 @@ class CommodityController extends Controller
 //                'data' => null
 //            ]);
 //        }
+
         $Commodity = Commodity::findOrFail($id);
         if ($request->has('tag_ids')) {
             $Commodity->tag_ids = json_encode($request->input('tag_ids'), true);

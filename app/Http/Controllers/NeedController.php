@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Need;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
 
 class NeedController extends Controller
 {
@@ -13,6 +15,7 @@ class NeedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index($id)
     {
         //
@@ -24,6 +27,7 @@ class NeedController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create(Request $request)
     {
         //
@@ -33,6 +37,7 @@ class NeedController extends Controller
         $Need->commodity_id = $request->input('commodity_id');
         $Need->save();
         return $Need;
+
     }
 
     /**
@@ -52,10 +57,12 @@ class NeedController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show()
     {
         //
         return Need::all();
+
     }
 
     /**
@@ -64,6 +71,7 @@ class NeedController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id, Request $request)
     {
         //
@@ -88,6 +96,7 @@ class NeedController extends Controller
         }
         $Need->save();
         return $Need;
+
     }
 
     /**
@@ -110,7 +119,8 @@ class NeedController extends Controller
      */
     public function destroy($id)
     {
-        //
+
         return Need::destroy($id);
+
     }
 }

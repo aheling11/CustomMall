@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+
 
 class TagController extends Controller
 {
@@ -13,16 +15,19 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index($id)
     {
         //
         return Tag::findOrFail($id);
     }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create(Request $request)
     {
         //
@@ -33,6 +38,7 @@ class TagController extends Controller
         $Tag->save();
         return $Tag;
     }
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -50,10 +56,12 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function show()
     {
         //
         return Tag::all();
+
     }
 
     /**
@@ -62,6 +70,7 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit($id, Request $request)
     {
         //
@@ -80,6 +89,7 @@ class TagController extends Controller
 
         $Tag->save();
         return $Tag;
+
     }
 
     /**
@@ -104,5 +114,6 @@ class TagController extends Controller
     {
         //
         return Tag::destroy($id);
+
     }
 }
