@@ -15,9 +15,10 @@ class CreateBillsTable extends Migration
     {
         Schema::create('bills', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('commodity_id');
+            $table->string('commodity_id');
             $table->integer('user_id');
             $table->integer('is_finished')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

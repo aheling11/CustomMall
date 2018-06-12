@@ -18,6 +18,7 @@ class CreateNeedsTable extends Migration
             $table->string('message');
             $table->integer('price')->defalut(0);
             $table->integer('commodity_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

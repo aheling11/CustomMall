@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+
+use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+
 
 class TagController extends Controller
 {
@@ -11,9 +15,11 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function index($id)
     {
         //
+        return Tag::findOrFail($id);
     }
 
     /**
@@ -21,11 +27,18 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+
+    public function create(Request $request)
     {
         //
-    }
+        $Tag = new Tag();
 
+        $Tag->message = $request->input('message');
+
+        $Tag->save();
+        return $Tag;
+    }
+  
     /**
      * Store a newly created resource in storage.
      *
@@ -43,9 +56,12 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function show()
     {
         //
+        return Tag::all();
+
     }
 
     /**
@@ -54,9 +70,26 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+
+    public function edit($id, Request $request)
     {
         //
+        if ($request->input('user')->id !== $request->input('user_id')) {
+            return new Response([
+                'code' => -1,
+                'message' => '没有权限',
+                'data' => null
+            ]);
+        }
+        $Tag = Tag::findOrFail($id);
+
+        if ($request->has('message')) {
+            $Tag->message = $request->input('message');
+        }
+
+        $Tag->save();
+        return $Tag;
+
     }
 
     /**
@@ -80,5 +113,7 @@ class TagController extends Controller
     public function destroy($id)
     {
         //
+        return Tag::destroy($id);
+
     }
 }
