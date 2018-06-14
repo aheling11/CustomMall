@@ -123,7 +123,7 @@ class UserController extends Controller
             ];
         }
 
-        DB::insert(
+       DB::table('users')->insert(
             [
                 'name' => $name,
                 'email' => $email,
