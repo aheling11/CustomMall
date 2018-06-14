@@ -21,6 +21,14 @@ class UserController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
+        if (empty($email) || empty($password)) {
+            return [
+                'code' => 65535,
+                'msg' => '参数缺失',
+                'data' => []
+            ];
+        }
+
         $user = DB::table('users')->where('email', $email)->first();
 
         if (empty($user)) {
