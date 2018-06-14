@@ -83,7 +83,15 @@ class UserController extends Controller
         $password = $request->input('password');
         $confirm_password = $request->input('confirm_password');
 
-        if($password != $confirm_password){
+        if (empty($name) || empty($email) || empty($password) || empty($confirm_password)) {
+            return [
+                'code' => 65535,
+                'msg' => '参数缺失',
+                'data' => []
+            ];
+        }
+
+        if ($password != $confirm_password) {
             return [
                 'code' => -1,
                 'msg' => '$password $confirm_password  不同',
