@@ -26,6 +26,12 @@ class ApiMiddleware
             return $response;
         }
 
+        // Pre-Middleware Action
+        if (($request->method() == 'GET') && $request->path() == 'api/user/register') {
+            $response = $next($request);
+            return $response;
+        }
+
         if (!$request->hasHeader('token')) {
             return new Response([
                 'code' => -1,

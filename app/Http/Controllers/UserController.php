@@ -21,12 +21,18 @@ class UserController extends Controller
         $email = $request->input('email');
         $password = $request->input('password');
 
-        $user = DB::table('users')->where([
-            ['email', '=', $email]
-        ])->first();
+        $user = DB::table('users')->where('email', $email)->first();
 
+        if (empty($user)) {
+            return [
+                'code' => 1,
+                'token' => '',
+                'message' => '请检查账号 或 密码 是否正确',
+                'data' => $user
+            ];
+        }
 
-        if(Hash::check($password,$user->password)){
+        if (Hash::check($password, $user->password)) {
             $user->token = md5(time() . 'quandouguo');
             DB::table('users')
                 ->where([
@@ -72,7 +78,43 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->input('name');
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $confirm_password = $request->input('confirm_password');
+
+        if($password != $confirm_password){
+            return [
+                'code' => -1,
+                'msg' => '$password $confirm_password  不同',
+                'data' => []
+            ];
+        }
+
+        $user = DB::table('users')->where('email', $email)->first();
+
+        if (!empty($user)) {
+            return [
+                'code' => 1,
+                'msg' => '已注册',
+                'data' => []
+            ];
+        }
+
+        DB::insert(
+            [
+                'name' => $name,
+                'email' => $email,
+                'password' => Hash::make($password)
+            ]
+        );
+
+        return [
+            'code' => 0,
+            'msg' => '成功',
+            'data' => []
+        ];
+
     }
 
     /**
