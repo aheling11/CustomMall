@@ -27,7 +27,7 @@ class ApiMiddleware
         }
 
         // Pre-Middleware Action
-        if (($request->method() == 'GET') && $request->path() == 'api/user/register') {
+        if (($request->method() == 'POST') && $request->path() == 'api/user/register') {
             $response = $next($request);
             return $response;
         }

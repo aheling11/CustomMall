@@ -55,7 +55,13 @@ class UserController extends Controller
                 'data' => $user
             ];
         }
-
+        
+        return [
+            'code' => 1,
+            'token' => '',
+            'message' => '请检查账号 或 密码 是否正确',
+            'data' => $user
+        ];
     }
 
     /**
