@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 
+use App\Commodity;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 
 class TagController extends Controller
@@ -114,6 +116,33 @@ class TagController extends Controller
     {
         //
         return Tag::destroy($id);
+
+    }
+
+
+    /**
+     * 查询某标签id下所有商品.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function allcommodities($id)
+    {
+
+        $all_commodities = DB::table('commodities')
+            ->get()
+            ->toArray();
+        $all_tag_commodites = array();
+        foreach ($all_commodities as $key => $commodity_t) {
+            $array = json_decode(json_encode($commodity_t), true);
+            $ids_array = explode(',' ,json_decode($array['tag_ids']));
+            foreach ($ids_array as $tag_id) {
+                if ($tag_id == $id) {
+                    $all_tag_commodites[] = $array;
+                }
+            }
+        }
+        return $all_tag_commodites;
 
     }
 }
