@@ -19,6 +19,10 @@ class ApiMiddleware
     public function handle($request, Closure $next, $guard = null)
     {
 
+        if($request->method() == 'OPTIONS'){
+            $response = $next($request);
+            return $response;
+        }
 
         // Pre-Middleware Action
         if (($request->method() == 'POST') && $request->path() == 'api/user') {
