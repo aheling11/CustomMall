@@ -16,8 +16,7 @@ class UploadFileController extends Controller
     public function store(Request $request)
     {
 
-        var_dump($_FILES);
-        exit();
+
 
         if (!$request->hasFile('file')) {
             return response()->json(['无法获取上传文件'], 500);
@@ -44,7 +43,7 @@ class UploadFileController extends Controller
             ]);
 
         } else {
-            return response()->json([], 500, '文件未通过验证');
+            return response()->json(['文件未通过验证'], 500);
         }
 
     }
