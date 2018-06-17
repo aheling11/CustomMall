@@ -24,6 +24,8 @@ class UploadFileController extends Controller
 
         $file = $request->file('file');
 
+        dd($file);
+
         if ($file->isValid()) {
             // 获取文件相关信息
             $originalName = $file->getClientOriginalName(); // 文件原名
