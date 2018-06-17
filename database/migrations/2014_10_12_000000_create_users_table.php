@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('img')->default('http://blog-1252847423.file.myqcloud.com/avatar.png');
             $table->string('token')->nullable();
             $table->rememberToken();
             $table->timestamps();
