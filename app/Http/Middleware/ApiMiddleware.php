@@ -19,7 +19,7 @@ class ApiMiddleware
     public function handle($request, Closure $next, $guard = null)
     {
 
-        if($request->method() == 'OPTIONS'){
+        if ($request->method() == 'OPTIONS') {
             $response = $next($request);
             return $response;
         }
@@ -54,7 +54,9 @@ class ApiMiddleware
             ]);
         }
 
-        $request->merge(['user' => $user]);
+
+        $request->offsetSet('user', $user);
+
 
         return $next($request);
     }

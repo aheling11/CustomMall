@@ -72,7 +72,8 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //
-        return $request->input('user');
+        $user = $request->input('user');
+        return Response::json($user);
     }
 
     /**
@@ -124,7 +125,7 @@ class UserController extends Controller
             ];
         }
 
-       DB::table('users')->insert(
+        DB::table('users')->insert(
             [
                 'name' => $name,
                 'email' => $email,
