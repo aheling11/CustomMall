@@ -17,18 +17,16 @@ class UploadFileController extends Controller
     {
 
 
-
         if (!$request->hasFile('file')) {
             return response()->json(['无法获取上传文件'], 500);
         }
 
         $file = $request->file('file');
 
-        dd($file);
 
         if ($file->isValid()) {
             // 获取文件相关信息
-            $originalName = $file->getClientOriginalName(); // 文件原名
+//            $originalName = $file->getClientOriginalName(); // 文件原名
 //            $ext = $file->getClientOriginalExtension();     // 扩展名
 //            $realPath = $file->getRealPath();   //临时文件的绝对路径
 //            $type = $file->getClientMimeType();     // image/jpeg
@@ -41,7 +39,7 @@ class UploadFileController extends Controller
                 'status_code' => 200,
                 'message' => 'success',
                 'photo' => $path,
-                'name' => $originalName,
+                'name' => $filename,
             ]);
 
         } else {
