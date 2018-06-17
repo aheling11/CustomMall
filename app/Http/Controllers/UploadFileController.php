@@ -16,9 +16,13 @@ class UploadFileController extends Controller
     public function store(Request $request)
     {
 
+        var_dump($_FILES);
+        exit();
+
         if (!$request->hasFile('file')) {
-            return response()->json([], 500, '无法获取上传文件');
+            return response()->json(['无法获取上传文件'], 500);
         }
+
         $file = $request->file('file');
 
         if ($file->isValid()) {

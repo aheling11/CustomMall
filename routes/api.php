@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('apiMidd')->group(function () {
     Route::post('/user', 'UserController@login');
+    Route::get('/user', 'UserController@index');
     Route::post('/user/register', 'UserController@store');
     Route::post('/commodity', 'CommodityController@create');
     Route::get('/commodity', 'CommodityController@show');
