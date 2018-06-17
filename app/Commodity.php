@@ -40,12 +40,19 @@ class Commodity extends Model
 
     public function getTagIdsAttribute()
     {
-        return json_decode($this->attributes['tag_ids'],true);
+        return json_decode($this->attributes['tag_ids'], true);
 
     }
 
     public function getPicIdsAttribute()
     {
-        return json_decode($this->attributes['pic_ids'],true);
+        return json_decode($this->attributes['pic_ids'], true);
     }
+
+
+    public function user()
+    {
+        return $this->belongsTo('App\User', 'user_id');
+    }
+
 }

@@ -18,7 +18,9 @@ class CommodityController extends Controller
     public function index($id)
     {
         //
-        return Commodity::findOrFail($id);
+        $commodity = Commodity::findOrFail($id);
+        $commodity['user'] = $commodity->user;
+        return $commodity;
     }
 
     /**
@@ -63,7 +65,11 @@ class CommodityController extends Controller
     public function show()
     {
         //
-        return Commodity::all();
+        $commoditys = Commodity::all();
+        foreach ($commoditys as $key => $commodity) {
+            $commoditys[$key]['user'] = $commodity->user;
+        }
+        return $commoditys;
     }
 
     /**

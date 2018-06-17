@@ -39,7 +39,10 @@ class BillController extends Controller
 
     public function index($id)
     {
-        return Bill::findOrFail($id);
+        $bill = Bill::findOrFail($id);
+        $bill['user'] = $bill->user;
+        $bill['commodity'] = $bill->commodity;
+        return $bill;
     }
     /**
      * Display the specified resource.
@@ -49,8 +52,13 @@ class BillController extends Controller
      */
     public function show()
     {
-        //
-        return Bill::all();
+        $bills = Bill::all();
+        foreach ($bills as $key => $bill) {
+            $bills[$key]['user'] = $bill->user;
+            $bills[$key]['commodity'] = $bill->commodity;
+
+        }
+        return $bills;
     }
 
     /**
