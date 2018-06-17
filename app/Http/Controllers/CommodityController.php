@@ -37,6 +37,7 @@ class CommodityController extends Controller
         $Commodity->price = $request->input('price');
         $Commodity->count = $request->input('count');
         $Commodity->is_auctioneer = $request->input('is_auctioneer');
+        $Commodity->countdown = $request->input('countdown');
         $Commodity->user_id = $request->input('user')->id;
         $Commodity->save();
         return $Commodity;
