@@ -114,8 +114,14 @@ class BillController extends Controller
     {
         $user_id = $request->input('user_id');
 
-        return Bill::where('user_id', $user_id)
+        $bills = Bill::where('user_id', $user_id)
             ->get();
+        foreach ($bills as $key => $bill) {
+            $bills[$key]['user'] = $bill->user;
+            $bills[$key]['commodity'] = $bill->commodity;
+
+        }
+        return $bills;
     }
 
 
