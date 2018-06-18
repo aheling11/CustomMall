@@ -142,4 +142,16 @@ class CommodityController extends Controller
         //
         return Commodity::destroy($id);
     }
+
+    public function list(Request $request)
+    {
+        $user_id = $request->input('user_id');
+
+        $commoditys = Commodity::where('user_id', $user_id)
+            ->get();
+        foreach ($commoditys as $key => $commodity) {
+            $commodity[$key]['user'] = $commodity->user;
+        }
+        return $commoditys;
+    }
 }
