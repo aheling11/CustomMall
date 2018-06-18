@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Bill;
+use App\Commodity;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -11,7 +12,6 @@ use Illuminate\Support\Facades\Auth;
 
 class BillController extends Controller
 {
-
 
 
     /**
@@ -25,7 +25,11 @@ class BillController extends Controller
         $Bill = new Bill();
         $Bill->commodity_id = json_encode($request->input('commodity_id'), true);
         $Bill->user_id = $request->input('user_id');
+        $Bill->count = $request->input('count', 1);
         $Bill->is_finished = $request->input('is_finished');
+        $comm = Commodity::findOrFail($Bill->commodity_id);
+        $comm->count = ($comm->count - $Bill->count) < 0 ? 0 : $comm->count - $Bill->count;
+        $comm->save();
         $Bill->save();
         return $Bill;
     }
@@ -44,6 +48,7 @@ class BillController extends Controller
         $bill['commodity'] = $bill->commodity;
         return $bill;
     }
+
     /**
      * Display the specified resource.
      *
@@ -109,7 +114,7 @@ class BillController extends Controller
     {
         $user_id = $request->input('user_id');
 
-        return Bill::where('user_id',$user_id)
+        return Bill::where('user_id', $user_id)
             ->get();
     }
 
