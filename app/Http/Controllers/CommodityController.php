@@ -150,7 +150,7 @@ class CommodityController extends Controller
         $commoditys = Commodity::where('user_id', $user_id)
             ->get();
         foreach ($commoditys as $key => $commodity) {
-            $commodity[$key]['user'] = $commodity->user;
+            $commoditys[$key]['user'] = $commodity->user;
         }
         return $commoditys;
     }

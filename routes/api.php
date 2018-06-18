@@ -23,6 +23,7 @@ Route::middleware('apiMidd')->group(function () {
     Route::get('/commodity/{id}', 'CommodityController@index');
     Route::put('/commodity/{id}', 'CommodityController@edit');
     Route::delete('/commodity/{id}', 'CommodityController@destroy');
+    Route::get('/commodity', 'CommodityController@list');
 
     Route::post('/bill', 'BillController@create');
     Route::get('/bill', 'BillController@show');
