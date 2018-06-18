@@ -112,6 +112,9 @@ class CommodityController extends Controller
         if ($request->has('is_auctioneer')) {
             $Commodity->is_auctioneer = $request->input('is_auctioneer');
         }
+        if ($request->has('type')) {
+            $Commodity->type = $request->input('type');
+        }
         $Commodity->save();
         return $Commodity;
     }
