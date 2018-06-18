@@ -105,7 +105,13 @@ class BillController extends Controller
         return Bill::destroy($id);
     }
 
+    public function list(Request $request)
+    {
+        $user_id = $request->input('user_id');
 
+        return Bill::where('user_id',$user_id)
+            ->get();
+    }
 
 
 }

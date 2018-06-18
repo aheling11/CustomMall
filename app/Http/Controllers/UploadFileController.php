@@ -48,4 +48,10 @@ class UploadFileController extends Controller
 
     }
 
+    public function upload(Request $request)
+    {
+        $files = $request->file();
+        return $files;
+    }
+
 }
