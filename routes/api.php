@@ -36,7 +36,7 @@ Route::middleware('apiMidd')->group(function () {
     Route::put('/need/{id}', 'NeedController@edit');
     Route::delete('/need/{id}', 'NeedController@destroy');
     Route::get('/need', 'NeedController@list');
-    Route::post('/need/test', 'NeedController@test');
+
 
 
     Route::post('/tag', 'TagController@create');
