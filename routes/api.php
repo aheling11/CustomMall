@@ -29,7 +29,7 @@ Route::middleware('apiMidd')->group(function () {
     Route::get('/bill/{id}', 'BillController@index');
     Route::put('/bill/{id}', 'BillController@edit');
     Route::delete('/bill/{id}', 'BillController@destroy');
-    Route::get('/bill', 'NeedController@list');
+    Route::get('/bill', 'BillController@list');
 
     Route::post('/need', 'NeedController@create');
     Route::get('/need', 'NeedController@show');
