@@ -34,9 +34,35 @@ class NeedController extends Controller
         $Need = new Need();
         $Need->message = $request->input('message');
         $Need->commodity_id = $request->input('commodity_id');
+        $Need->price = $this->calPrice($Need->message);
         $Need->save();
         return $Need;
 
+    }
+
+
+    protected function calPrice($message)
+    {
+        $t = 500;
+        $arr = ['Web开发','开发','网页','商城','游戏','小程序','管理','餐饮','娱乐','农业','旅游','网站','金融','区块链','H5','项目','应用','logo','优美','稳定','分布式','大数据','机器学习','人工智能','流畅','特色','吸引','流量','系统','网络','IOS','安卓','Android','android','交互','框架','整站'];
+
+        for ($i=0; $i<sizeof($arr); $i++)
+        {
+            $pos = strpos($message, $arr[$i]);
+            if ($pos!=false) {
+                if ($i<floor(sizeof($arr)/3)) {
+                    $t += 500;
+                }
+                if ($i>floor(sizeof($arr)/3) && $i<floor(sizeof($arr)/3*2)) {
+                    $t += 1000;
+                }
+                if ($i>floor(sizeof($arr)/3*1) && $i<floor(sizeof($arr))) {
+                    $t += 1500;
+                }
+
+            }
+        }
+        return $t;
     }
 
     /**
