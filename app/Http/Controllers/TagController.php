@@ -130,17 +130,40 @@ class TagController extends Controller
     {
 
         $all_commodities = DB::table('commodities')
+            ->orderBy('updated_at','desc')
             ->get()
             ->toArray();
         $all_tag_commodites = array();
 
+        $tags = DB::table('tags')
+            ->get()
+            ->toArray();
+        $tags = json_decode(json_encode($tags), true);
+
+        $users = DB::table('users')
+            ->get()
+            ->toArray();
+        $users = json_decode(json_encode($users), true);
+
         foreach ($all_commodities as $key => $commodity_t) {
+
+
             $array = json_decode(json_encode($commodity_t), true);
-//            dd(json_decode($array['tag_ids']));
+            $array['tag_name'] = $tags[$id]['message'];
+            //加入username进array
+            $array['username'] = $users[$array['user_id']]['name'];
+
             $ids_array = json_decode($array['tag_ids']);
-//            $ids_array = explode(',' ,json_decode($array['tag_ids']));
+            //遍历一边ids_array，将id转化成名字
+            $tag_id_names = array();
+
+            foreach ($ids_array as $tag_id) {
+                $tag_id_names[] = $tags[$tag_id-1]['message'];
+            }
+            $array['tag_ids_name'] = $tag_id_names;
             foreach ($ids_array as $tag_id) {
                 if ($tag_id == $id) {
+
                     $all_tag_commodites[] = $array;
                 }
             }
@@ -167,6 +190,7 @@ class TagController extends Controller
         {
             $result[$i]['tag_name'] = $tags[$i]['message'];
             $result[$i]['details'] = $this->allcommodities($i);
+
         }
         return $result;
     }
