@@ -120,13 +120,22 @@ class TagController extends Controller
     }
 
 
+    public function allcommodities($id) {
+        $result = array();
+        $t = $this->commmonallcommodities($id);
+        $result['tag_name'] = $t[0]['tag_name'];
+        $result['data'] = $t;
+        return $result;
+    }
+
+
     /**
      * 查询某标签id下所有商品.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function allcommodities($id)
+    public function commmonallcommodities($id)
     {
 
         $all_commodities = DB::table('commodities')
@@ -189,7 +198,7 @@ class TagController extends Controller
         for ($i=0; $i<sizeof($tags); $i++)
         {
             $result[$i]['tag_name'] = $tags[$i]['message'];
-            $result[$i]['details'] = $this->allcommodities($i);
+            $result[$i]['details'] = $this->commmonallcommodities($i);
 
         }
         return $result;
