@@ -47,7 +47,7 @@ Route::middleware('apiMidd')->group(function () {
     Route::put('/tag/{id}', 'TagController@edit');
     Route::delete('/tag/{id}', 'TagController@destroy');
     Route::get('/tag/allcommodities/{id}', 'TagController@allcommodities');
-
+    Route::get('/alltagscommodities', 'TagController@alltagscommodities');
 
 });
 //Auth::routes();

@@ -133,9 +133,12 @@ class TagController extends Controller
             ->get()
             ->toArray();
         $all_tag_commodites = array();
+
         foreach ($all_commodities as $key => $commodity_t) {
             $array = json_decode(json_encode($commodity_t), true);
-            $ids_array = explode(',' ,json_decode($array['tag_ids']));
+//            dd(json_decode($array['tag_ids']));
+            $ids_array = json_decode($array['tag_ids']);
+//            $ids_array = explode(',' ,json_decode($array['tag_ids']));
             foreach ($ids_array as $tag_id) {
                 if ($tag_id == $id) {
                     $all_tag_commodites[] = $array;
@@ -144,5 +147,27 @@ class TagController extends Controller
         }
         return $all_tag_commodites;
 
+    }
+
+    /**
+     * 查询所有标签下的所有商品.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function alltagscommodities()
+    {
+        $result = array();
+        $tags = DB::table('tags')
+            ->get()
+            ->toArray();
+        $tags = json_decode(json_encode($tags), true);
+
+        for ($i=0; $i<sizeof($tags); $i++)
+        {
+            $result[$i]['tag_name'] = $tags[$i]['message'];
+            $result[$i]['details'] = $this->allcommodities($i);
+        }
+        return $result;
     }
 }

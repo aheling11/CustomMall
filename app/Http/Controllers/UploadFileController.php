@@ -33,6 +33,7 @@ class UploadFileController extends Controller
 
             // 上传文件
             $filename = date('Ymd/His');
+
             // 使用我们新建的uploads本地存储空间（目录）
             $path = $file->store($filename, 'uploads');
             return response()->json([
@@ -51,6 +52,7 @@ class UploadFileController extends Controller
     public function upload(Request $request)
     {
         $files = $request->file();
+
         return $files;
     }
 
