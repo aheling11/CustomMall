@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Commodity;
 use App\Need;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -149,10 +150,12 @@ class NeedController extends Controller
 
     }
 
-    public function list(Request $request)
+    public function l_ist(Request $request)
     {
         $commodity_id = $request->input('commodity_id');
-
+        if ($commodity_id==null) {
+            return Need::all();
+        }
         return Need::where('commodity_id',$commodity_id)
             ->get();
     }

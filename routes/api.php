@@ -23,21 +23,21 @@ Route::middleware('apiMidd')->group(function () {
     Route::get('/commodity/{id}', 'CommodityController@index');
     Route::put('/commodity/{id}', 'CommodityController@edit');
     Route::delete('/commodity/{id}', 'CommodityController@destroy');
-    Route::get('/commodity', 'CommodityController@list');
+    Route::get('/commodity', 'CommodityController@l_ist');
 
     Route::post('/bill', 'BillController@create');
     Route::get('/bill', 'BillController@show');
     Route::get('/bill/{id}', 'BillController@index');
     Route::put('/bill/{id}', 'BillController@edit');
     Route::delete('/bill/{id}', 'BillController@destroy');
-    Route::get('/bill', 'BillController@list');
+    Route::get('/bill', 'BillController@l_ist');
 
     Route::post('/need', 'NeedController@create');
     Route::get('/need', 'NeedController@show');
     Route::get('/need/{id}', 'NeedController@index');
     Route::put('/need/{id}', 'NeedController@edit');
     Route::delete('/need/{id}', 'NeedController@destroy');
-    Route::get('/need', 'NeedController@list');
+    Route::get('/need', 'NeedController@l_ist');
 
 
 

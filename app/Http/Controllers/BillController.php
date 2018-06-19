@@ -110,10 +110,18 @@ class BillController extends Controller
         return Bill::destroy($id);
     }
 
-    public function list(Request $request)
+    public function l_ist(Request $request)
     {
         $user_id = $request->input('user_id');
+        if ($user_id==null) {
+            $bills = Bill::all();
+            foreach ($bills as $key => $bill) {
+                $bills[$key]['user'] = $bill->user;
+                $bills[$key]['commodity'] = $bill->commodity;
 
+            }
+            return $bills;
+        }
         $bills = Bill::where('user_id', $user_id)
             ->get();
         foreach ($bills as $key => $bill) {
