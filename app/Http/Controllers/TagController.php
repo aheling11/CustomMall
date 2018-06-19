@@ -152,7 +152,7 @@ class TagController extends Controller
             $array['tag_name'] = $tags[$id]['message'];
             //加入username进array
             $array['username'] = $users[$array['user_id']]['name'];
-
+            $array['pic_ids'] = json_decode($array['pic_ids'], true);
             $ids_array = json_decode($array['tag_ids']);
             //遍历一边ids_array，将id转化成名字
             $tag_id_names = array();
