@@ -41,8 +41,33 @@ class CommodityController extends Controller
         $Commodity->is_auctioneer = $request->input('is_auctioneer');
         $Commodity->countdown = $request->input('countdown');
         $Commodity->user_id = $request->input('user')->id;
+        $Commodity->type = $request->input('type');
         $Commodity->save();
         return $Commodity;
+    }
+
+    public function addauction(Request $request)
+    {
+        //
+
+
+        if (!$request->has('id')) {
+            return new Response([
+                'code' => 65535,
+                'message' => '参数不全',
+                'data' => null
+            ]);
+        }
+
+        $Commodity = Commodity::findOrFail($request->input('id'));
+
+        if ($request->has('price')) {
+            $Commodity->price = $request->input('price');
+        }
+
+        $Commodity->save();
+        return $Commodity;
+
     }
 
     /**

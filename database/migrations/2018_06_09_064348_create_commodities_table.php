@@ -24,6 +24,7 @@ class CreateCommoditiesTable extends Migration
             $table->integer('is_auctioneer')->default(0);
             $table->integer('countdown')->nullable();
             $table->integer('user_id');
+            $table->integer('type')->defalt(0);
             $table->softDeletes();
             $table->timestamps();
         });
